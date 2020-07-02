@@ -1,0 +1,20 @@
+{
+  "name": "leetcode",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/lintuming/leetcode.git",
+  "author": "lintuming <lintuming@tuzhanai.com>",
+  "license": "MIT",
+  "scripts": {
+    "build:README": "node ./scripts/buildReadme.js"
+  },
+  "husky":{
+    "hooks":{
+      "pre-commit":"yarn build:README&&git add ."
+    }
+  },
+  "devDependencies": {
+    "husky": "^4.2.5",
+    "node-glob": "^1.2.0"
+  }
+}
