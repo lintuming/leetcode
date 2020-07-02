@@ -10,7 +10,7 @@
   },
   "husky":{
     "hooks":{
-      "pre-commit":"yarn build:README&&git add ."
+      "pre-commit":"yarn build:README&&git add README.md"
     }
   },
   "devDependencies": {

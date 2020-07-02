@@ -24,7 +24,7 @@ function write(lines) {
     .map((line) => {
       line = Array.isArray(line) ? line : [line, ""];
       const [sequence, content] = line;
-      const [fileName] = glob.sync(`${sequence}.*.js`);
+      const [fileName] = glob.sync(`solutions/${sequence}.*.js`);
       return formatOutput(fileName, content);
     })
     .join("\n");
