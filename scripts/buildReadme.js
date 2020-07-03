@@ -11,11 +11,12 @@ const sortByIndex = (a, b) => {
   return a - b;
 };
 
-function formatOutput(fileName, content) {
+const fileRegexp = /((?<=\\|\/)[0-9]+\..*\.js$)/g;
+
+function formatOutput(path, content) {
+  const [fileName] = path.match(fileRegexp);
   const [num, name] = fileName.split(".");
-  const output = `- [${num}.${name}](./${fileName})${
-    content ? "-" : ""
-  }${content}`;
+  const output = `- [${num}.${name}](./${path})${content}`;
   return output;
 }
 

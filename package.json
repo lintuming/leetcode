@@ -1,9 +1,6 @@
 {
   "name": "leetcode",
   "version": "1.0.0",
-  "main": "index.js",
-  "repository": "https://github.com/lintuming/leetcode.git",
-  "author": "lintuming <lintuming@tuzhanai.com>",
   "license": "MIT",
   "scripts": {
     "build:README": "node ./scripts/buildReadme.js"
