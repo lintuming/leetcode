@@ -16,20 +16,27 @@
  * @param {ListNode} head
  * @return {ListNode}
  */
-var insertionSortList = function(head) {
-    const dummy = new ListNode(-Number.MAX_SAFE_INTEGER);
-    dummy.next = head;
-    let prev = dummy
-    let cur = head;
-    while(cur){
-        const next = cur.next;
-        prev.next = next;
-        cur.next = null;
-        let node = dummy;
-        while(cur.val>node.val&&node.next!==next){
-            node = node.next
-        }
+var insertionSortList = function (head) {
+  const dummy = new ListNode(-Number.MAX_SAFE_INTEGER);
+  dummy.next = head;
+  let prev = dummy;
+  let cur = head;
+  while (cur) {
+    const next = cur.next;
+    prev.next = next;
+    cur.next = null;
+    let node = dummy;
+    while (node.next && node.next !== next && node.next.val < cur.val) {
+      node = node.next;
     }
+    const nodeNext = node.next;
+    if (nodeNext === next) {
+      prev = cur;
+    }
+    node.next = cur;
+    cur.next = nodeNext;
+    cur = next;
+  }
+  return dummy.next;
 };
 // @lc code=end
-
