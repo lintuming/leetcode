@@ -9,7 +9,25 @@
  * @param {number[]} nums
  * @return {number}
  */
+// 由于需要最小的正整数,范围只能是 [1,nums.length+1]
 var firstMissingPositive = function (nums) {
-  
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] <= 0) {
+      nums[i] = nums.length + 1;
+    }
+  }
+  for (let i = 0; i < nums.length; i++) {
+    const abs = Math.abs(nums[i]);
+    if (abs <= nums.length) {
+      nums[abs - 1] = -1 * Math.abs(nums[abs - 1]);
+    }
+  }
+  for (let i = 0; i < nums.length; i++){
+    if (nums[i] > 0) {
+      return i + 1
+    }
+  }
+  return nums.length + 1
 };
 // @lc code=end
+console.log(firstMissingPositive([1,1]))

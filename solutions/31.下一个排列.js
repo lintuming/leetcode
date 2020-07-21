@@ -9,7 +9,13 @@
  * @param {number[]} nums
  * @return {void} Do not return anything, modify nums in-place instead.
  */
-var nextPermutation = function (nums) {
+var nextPermutation = s1;
+
+function s2(nums) {
+
+}
+
+function s1(nums) {
   for (let i = nums.length - 2; i >= 0; i--) {
     if (nums[i] < nums[i + 1]) {
       let j = nums.length - 1;
@@ -17,22 +23,24 @@ var nextPermutation = function (nums) {
         j--;
       }
       [nums[i], nums[j]] = [nums[j], nums[i]];
-      reverse(nums, i + 1, nums.length-1);
-      return;
+      reverse(nums, i + 1, nums.length - 1);
+      return nums;
     }
   }
-  reverse(nums, 0, nums.length-1);
+  reverse(nums, 0, nums.length - 1);
   function reverse(arr, from, end) {
     const mid = ((from + end) / 2) | 0;
     let left = from;
-    let right = end ;
+    let right = end;
     while (left <= mid) {
       [arr[left], arr[right]] = [arr[right], arr[left]];
       left++;
       right--;
     }
   }
-};
+}
 // @lc code=end
 
-console.log(nextPermutation([1, 3, 2]));
+console.log(nextPermutation([1,3,4,2]));
+
+// 1234 1243 1324 1342
