@@ -22,7 +22,8 @@ const badSolution = [
   [162, "- 二分法"],
   164,
   166,
-  187
+  187,
+  209
 ];
 
 function buildLine(lines) {
