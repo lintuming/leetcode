@@ -60,6 +60,7 @@ const reConsider = [
   ],
   [169, "- Boyer-Moore 投票算法"],
   174,
+  529
 ];
 
 const configs = [badSolution, reConsider];

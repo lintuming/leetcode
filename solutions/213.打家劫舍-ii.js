@@ -10,23 +10,20 @@
  * @return {number}
  */
 var rob = function (nums) {
-  if(nums.length<=0)return 0
-  const dp = [[nums[0], 0]];
-  let max = nums[0]
+  if (nums.length === 0) return 0;
+  const dp1 = [0, nums[0]];
+  const dp2 = [0, 0];
   for (let i = 1; i < nums.length; i++) {
-    if (i - 2 >= 0) {
-      if (i === nums.length - 1) {
-        dp[i] = [dp[i - 2][0], nums[i] + dp[i - 2][1]];
-      } else {
-        dp[i] = [nums[i] + dp[i - 2][0], (nums[i] + dp[i - 2][1])];
-      }
-    } else {
-      dp[i] = [0, nums[i]];
-    }
-    max = Math.max(...dp[i],max)
+    const index = i + 1;
+    const count = nums[i];
+    const isLast = i === nums.length - 1;
+    dp1[index] = isLast
+      ? Math.max(dp2[index - 2] + count, dp1[index - 1])
+      : Math.max(dp1[index - 2] + count, dp1[index - 1]);
+    dp2[index] = Math.max(dp2[index - 2] + count, dp2[index - 1]);
   }
-  return max
+  return Math.max(dp1[nums.length], dp2[nums.length]);
 };
 // @lc code=end
 
-console.log(rob([1,3,1,3,100]))
+console.log(rob([1, 2, 3, 1]));
