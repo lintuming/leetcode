@@ -10,7 +10,31 @@
  * @param {number} target
  * @return {boolean}
  */
-var searchMatrix = function (matrix, target) {
+var searchMatrix = function s2(matrix, target) {
+  let yl = matrix.length;
+  if (yl === 0) return false;
+  let xl = matrix[0].length;
+  let left = 0,
+    right = xl * yl - 1;
+  function get(index) {
+    const y = (index / xl) | 0;
+    const x = index % xl;
+    return matrix[y][x];
+  }
+  while (left <= right) {
+    const mid = ((left + right) / 2) | 0;
+    if (get(mid) === target) {
+      return true;
+    } else if (get(mid) < target) {
+      left = mid + 1;
+    } else if (get(mid) > target) {
+      right = mid - 1;
+    }
+  }
+  return false;
+};
+
+function s1(matrix, target) {
   if (matrix.length === 0) return false;
   const yMax = matrix.length,
     xMax = matrix[0].length;
@@ -29,7 +53,7 @@ var searchMatrix = function (matrix, target) {
     }
   }
   return false;
-};
+}
 // @lc code=end
 console.log(searchMatrix([[1, 3, 5, 7]], 3));
 console.log(searchMatrix([[1]], 1));

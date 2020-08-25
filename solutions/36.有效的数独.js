@@ -9,7 +9,36 @@
  * @param {character[][]} board
  * @return {boolean}
  */
-var isValidSudoku = function (board) {
+var isValidSudoku = function s2(board) {
+  const column = Array.from({ length: 9 }, () => new Map());
+  const row = Array.from({ length: 9 }, () => new Map());
+  const rect = Array.from({ length: 9 }, () => new Map());
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board[0].length; j++) {
+      const val = board[i][j];
+      if (val === ".") continue;
+      if (column[i].has(val)) {
+        return false;
+      } else {
+        column[i].set(val, true);
+      }
+      if (row[j].has(val)) {
+        return false;
+      } else {
+        row[j].set(val, true);
+      }
+      const indexOfRect = Math.floor(i / 3) * 3 + Math.floor(j / 3);
+      if (rect[indexOfRect].has(val)) {
+        return false;
+      } else {
+        rect[indexOfRect].set(val, true);
+      }
+    }
+  }
+  return true
+};
+
+function s1(board) {
   const column = [];
   const row = [];
   const rect = [];
@@ -21,7 +50,7 @@ var isValidSudoku = function (board) {
         return false;
       } else {
         column[i] = column[i] || new Map();
-        column[i].set(n,true);
+        column[i].set(n, true);
       }
       if (row[j] && row[j].has(n)) {
         return false;
@@ -39,7 +68,7 @@ var isValidSudoku = function (board) {
     }
   }
   return true;
-};
+}
 // @lc code=end
 console.log(
   isValidSudoku([

@@ -14,7 +14,37 @@ const match = {
   "[": "]",
   "{": "}",
 };
-var isValid = function (s) {
+var isValid = function s2(s){
+  const stack = [];
+  let i = 0;
+
+  for (let i = 0; i < s.length; i++) {
+    const parenthess = s[i];
+    if(parenthess === ')' || parenthess === '}' || parenthess === ']') {
+      const parenthessBefore = stack.pop();
+      if(match[parenthessBefore] !== parenthess) {
+        return false
+      }
+    } else {
+      stack.push(parenthess)
+    }
+  }
+  return stack.length === 0
+}
+
+function expect (args,value) {
+  console.log(isValid(args) === value)
+  return isValid(args) === value
+}
+expect('',false);
+expect('()[]{}',true);
+expect('(]',false);
+expect('([(]))',false)
+
+
+
+
+function s1(s) {
   const stack = [];
   let i = 0;
   while (i < s.length) {

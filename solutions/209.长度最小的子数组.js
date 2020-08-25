@@ -10,7 +10,30 @@
  * @param {number[]} nums
  * @return {number}
  */
-var minSubArrayLen = function (s, nums) {
+var minSubArrayLen = function s2(s,nums){
+  let min = - Number.MAX_SAFE_INTEGER;
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function s1(s, nums) {
  
   let i = 0,
     j = 0;

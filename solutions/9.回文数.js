@@ -10,7 +10,25 @@
  * @return {boolean}
  */
 // two points
-var isPalindrome = function (x) {
+var isPalindrome = function s2(x){
+  if(x<0)return false;
+  x = x + '';
+  let left = 0,right = x.length - 1;
+  while(left<=right){
+    if(x[left]!==x[right]){
+      return false
+    }
+    left++;
+    right--;
+  }
+  return true
+}
+
+
+
+
+
+function s1(x) {
   if (x < 0) return false;
   x = x + "";
   let left = 0,

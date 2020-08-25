@@ -10,7 +10,29 @@
  * @param {number} target
  * @return {number[]}
  */
-var searchRange = function (nums, target) {
+var searchRange = function s2(nums, target) {
+  let left = 0,
+    right = nums.length - 1;
+  while (left < right) {
+    const mid = ((left + right) / 2) | 0;
+    if (nums[mid] === target) {
+      if (nums[left] !== target) {
+        left++;
+      } else if (nums[right] !== target) {
+        right--;
+      } else {
+        return [left, right];
+      }
+    } else if (nums[mid] < target) {
+      left = mid + 1;
+    } else if (nums[mid] > target) {
+      right = mid - 1;
+    }
+  }
+  return nums[left] === target ? [left, left] : [-1, -1];
+};
+
+function s1(nums, target) {
   let left = 0,
     right = nums.length - 1;
   while (left <= right) {
@@ -34,6 +56,6 @@ var searchRange = function (nums, target) {
     }
   }
   return [-1, -1];
-};
+}
 // @lc code=end
-console.log(searchRange([5, 7, 7, 8, 8, 10], 7));
+console.log(searchRange([5, 7, 7, 8, 8, 10], 8));

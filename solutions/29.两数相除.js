@@ -10,8 +10,10 @@
  * @param {number} divisor
  * @return {number}
  */
-var divide = function(dividend, divisor) {
-
+var divide = function (dividend, divisor) {
+  const sign = Math.sign(dividend) * Math.sign(divisor);
+  function 
 };
 // @lc code=end
-
+0b011
+0b011

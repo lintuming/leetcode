@@ -9,7 +9,7 @@
  * @param {number[]} nums
  * @return {number[][]}
  */
-var permute = function (nums) {
+var permute = function s1(nums) {
   const result = [];
   const buffer = new Set();
   function backTrack() {

@@ -20,7 +20,30 @@
  *    4 9 2
  */
 
-var multiply = function (num1, num2) {
+var multiply = function s2(num1, num2) {
+  if (num1 === "0" || num2 === "0") return "0";
+  const ans = [];
+  for (let i = num1.length - 1; i >= 0; i--) {
+    const base = num1[i];
+    const baseIndex = num1.length - i - 1;
+    for (let j = num2.length - 1; j >= 0; j--) {
+      const r = base * num2[j];
+      const index = baseIndex + num2.length - j - 1;
+      ans[index] = ans[index] ? ans[index] + r : r;
+    }
+  }
+  for (let i = 0; i < ans.length; i++) {
+    const n = ans[i];
+    if (n >= 10) {
+      ans[i] = n % 10;
+      const m = Math.floor(n / 10);
+      ans[i + 1] = ans[i + 1] ? ans[i + 1] + m : m;
+    }
+  }
+  return ans.reverse().join("");
+};
+
+function s1(num1, num2) {
   if (num1 === "0" || num2 === "0") return "0";
   const result = [];
   function plus(index, val) {
@@ -44,7 +67,7 @@ var multiply = function (num1, num2) {
       plus(index, m * n);
     }
   }
-  return result.reverse().join('')
-};
+  return result.reverse().join("");
+}
 // @lc code=end
 console.log(multiply("123", "456"));

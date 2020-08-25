@@ -9,7 +9,25 @@
  * @param {string[]} strs
  * @return {string[][]}
  */
-var groupAnagrams = function (strs) {
+var groupAnagrams = function s1(strs) {
+  const ans = [];
+  function hashfy(str) {
+    
+  }
+  const hashTable = new Map();
+  for (let i = 0; i < strs.length; i++) {
+    const hash = hashfy(strs[i]);
+    if (hashTable.has(hash)) {
+      hashTable.get(hash).push(strs[i]);
+    } else {
+      hashTable.set(hash, [strs[i]]);
+    }
+  }
+  hashTable.forEach((v) => ans.push(v));
+  return ans
+};
+
+function s2(strs) {
   const hashMap = {};
   function hash(str) {
     return str.split("").sort().join("");
@@ -22,6 +40,5 @@ var groupAnagrams = function (strs) {
     acc.push(hashMap[key]);
     return acc;
   }, []);
-};
+}
 // @lc code=end
-console.log(groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]))
