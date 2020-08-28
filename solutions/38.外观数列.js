@@ -9,7 +9,27 @@
  * @param {number} n
  * @return {string}
  */
-var countAndSay = function (n) {
+const cache = [];
+var countAndSay = function s2(n) {
+  if (n === 1) return "1";
+  if (cache[n - 1]) {
+    return cache[n - 1];
+  }
+  const prev = countAndSay(n - 1);
+  let ans = "";
+  for (let i = 0; i < prev.length; i++) {
+    let count = 1;
+    while (i + 1 < prev.length && prev[i] === prev[i + 1]) {
+      i++;
+      count++;
+    }
+    ans += `${count}${prev[i]}`;
+  }
+  prev[n - 1] = ans;
+  return ans;
+};
+
+function s1(n) {
   if (n === 1) return "1";
   let prev = "1";
   for (let i = 2; i <= n; i++) {
@@ -21,17 +41,16 @@ var countAndSay = function (n) {
         continue;
       }
       result += count + prev[j];
-      count = 1
+      count = 1;
     }
-    prev = result
+    prev = result;
   }
-  return prev
-};
+  return prev;
+}
 // @lc code=end
 console.log(countAndSay(1));
-console.log(countAndSay(2))
-console.log(countAndSay(3))
-console.log(countAndSay(4))
-console.log(countAndSay(5))
-console.log(countAndSay(6))
-
+console.log(countAndSay(2));
+console.log(countAndSay(3));
+console.log(countAndSay(4));
+console.log(countAndSay(5));
+console.log(countAndSay(6));

@@ -10,7 +10,24 @@
  * @param {number} target
  * @return {number[][]}
  */
-var combinationSum = function (candidates, target) {
+var combinationSum = function s2(candidates, target) {
+  const ans = [];
+  const buffer = [];
+  function backTrack(from, sum) {
+    if (sum >= target) {
+      return sum === target ? ans.push(buffer.slice()) : void 0;
+    }
+    for (let i = from; i < candidates.length; i++) {
+      buffer.push(candidates[i]);
+      backTrack(i, sum + candidates[i]);
+      buffer.pop();
+    }
+  }
+  backTrack(0, 0);
+  return ans;
+};
+
+function s1(candidates, target) {
   const result = [];
   const buffer = [];
   function backTrack(from, total) {
@@ -22,12 +39,12 @@ var combinationSum = function (candidates, target) {
     }
     for (; from < candidates.length; from++) {
       buffer.push(candidates[from]);
-      backTrack(from,total+candidates[from]);
+      backTrack(from, total + candidates[from]);
       buffer.pop();
     }
   }
-  backTrack(0,0);
-  return result
-};
+  backTrack(0, 0);
+  return result;
+}
 // @lc code=end
-console.log(combinationSum([2,3,6,7],7))
+console.log(combinationSum([2, 3, 6, 7], 7));

@@ -9,7 +9,79 @@
  * @param {character[][]} board
  * @return {void} Do not return anything, modify board in-place instead.
  */
-var solveSudoku = function (board) {
+
+var solveSudoku = function s2(board) {
+  const createDefault = () => Array.from({ length: 9 }, () => 0);
+  const columnUsed = createDefault();
+  const rowUsed = createDefault();
+  const rectUsed = createDefault();
+
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board[i].length; j++) {
+      if (board[i][j] !== ".") {
+        rowUsed[i] |= 1 << (board[i][j] - 1);
+        columnUsed[j] |= 1 << (board[i][j] - 1);
+        const index = Math.floor(i / 3) * 3 + Math.floor(j / 3);
+        rectUsed[index] |= 1 << (board[i][j] - 1);
+      }
+    }
+  }
+  const pick = (bits) => {
+    for (let i = 1; i <= 9; i++) {
+      if (((1 << (i - 1)) & bits) === 0) {
+        return i;
+      }
+    }
+    return null;
+  };
+  const getBits = (x, y) => {
+    return (
+      columnUsed[x] |
+      rowUsed[y] |
+      rectUsed[Math.floor(y / 3) * 3 + Math.floor(x / 3)]
+    );
+  };
+  const addBit = (x, y, bit) => {
+    columnUsed[x] |= bit;
+    rowUsed[y] |= bit;
+    rectUsed[Math.floor(y / 3) * 3 + Math.floor(x / 3)] |= bit;
+    return () => {
+      columnUsed[x] &= ~bit;
+      rowUsed[y] &= ~bit;
+      rectUsed[Math.floor(y / 3) * 3 + Math.floor(x / 3)] &= ~bit;
+    };
+  };
+  function backTrack(x, y) {
+    if (y >= 9) {
+      return true;
+    }
+    let nextX = x + 1 < 9 ? x + 1 : 0,
+      nextY = x + 1 < 9 ? y : y + 1;
+    if (board[y][x] === ".") {
+      let bits = getBits(x, y);
+      let number;
+      while ((number = pick(bits))) {
+        const bit = 1 << (number - 1);
+        bits |= bit;
+        board[y][x] = number + "";
+        const removeBit = addBit(x, y, bit);
+        if (backTrack(nextX, nextY)) {
+          return true;
+        } else {
+          removeBit();
+          board[y][x] = '.'
+        }
+      }
+      return false;
+    } else {
+      return backTrack(nextX, nextY);
+    }
+  }
+  backTrack(0, 0);
+  return board;
+};
+
+function S1(board) {
   const column = Array.from({ length: 9 }, (_, i) =>
     Array.from({ length: 9 }, () => 1)
   );
@@ -49,7 +121,6 @@ var solveSudoku = function (board) {
   }
 
   function backTrack(i, j) {
-
     const n = board[i][j];
     let nextI = j + 1 < 9 ? i : i + 1;
     let nextJ = j + 1 < 9 ? j + 1 : 0;
@@ -77,7 +148,7 @@ var solveSudoku = function (board) {
   }
   backTrack(0, 0);
   return board;
-};
+}
 // @lc code=end
 console.log(
   solveSudoku([
