@@ -9,7 +9,23 @@
  * @param {string} s
  * @return {string[]}
  */
-var restoreIpAddresses = function (s) {
+var restoreIpAddresses = function s2 (){}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function s1(s) {
   const result = [];
   if (s.length === 0) return result;
   const buffer = [];

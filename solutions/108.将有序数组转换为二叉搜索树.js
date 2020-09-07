@@ -17,7 +17,21 @@
  * @return {TreeNode}
  */
 // 升序 inorder
-var sortedArrayToBST = function (nums) {
+var sortedArrayToBST = function s2 () {
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+function s1(nums) {
   function buildTree(left, right) {
     if (left > right) {
       return null;

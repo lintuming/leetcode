@@ -23,7 +23,8 @@ const badSolution = [
   164,
   166,
   187,
-  209
+  209,
+  75
 ];
 
 function buildLine(lines) {
@@ -60,7 +61,8 @@ const reConsider = [
   ],
   [169, "- Boyer-Moore 投票算法"],
   174,
-  529
+  529,
+ [84,'单调栈']
 ];
 
 const configs = [badSolution, reConsider];

@@ -21,6 +21,12 @@ var trap = function s3(heights) {
     ) {
       stack.pop();
       const leftBound = stack[stack.length - 1];
+      console.log(
+        i,
+        leftBound,
+        i - leftBound - 1,
+        Math.min(heights[leftBound], heights[i]) - heights[stackTop]
+      );
       if (leftBound != null) {
         ans +=
           (i - leftBound - 1) *
@@ -33,7 +39,7 @@ var trap = function s3(heights) {
   }
   return ans;
 };
-console.log(trap([2, 1, 0, 2]));
+console.log(trap([0, 1, 0, 2, 0, 0, 1, 3, 2, 1, 2, 1]));
 
 // function s2(heights) {
 //   let ans = 0;

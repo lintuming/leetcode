@@ -10,7 +10,30 @@
  * @param {string} word2
  * @return {number}
  */
-var minDistance = function (word1, word2) {
+var minDistance = function s2(word1, word2) {
+  const dp = Array.from({ length: word1.length + 1 }, (_, i) =>
+    i === 0 ? Array.from({ length: word2.length + 1 }, (_, i) => i) : [i]
+  );
+  
+  for (let i = 1; i <= word1.length; i++) {
+    for (let j = 1; j <= word2.length; j++) {
+      dp[i][j] = Math.min(
+        // insert
+        dp[i][j - 1] + 1,
+        // delete
+        dp[i - 1][j] + 1,
+        // replace
+        dp[i - 1][j - 1] + 1,
+        word2[j - 1] === word1[i - 1]
+          ? dp[i - 1][j - 1]
+          : Number.MAX_SAFE_INTEGER
+      );
+    }
+  }
+  return dp[word1.length][word2.length]
+};
+
+function s1(word1, word2) {
   // dp[i][j] 表示 word1 i之前的单词到word2 j 之前的单词的编辑距离（i,j不包括i,j,左开右闭关）,
   // 对于 dp[i][0]  恒有 dp[i][0] = i;
   // 例如 horse ros
@@ -44,6 +67,6 @@ var minDistance = function (word1, word2) {
     }
   }
   return dp[word1.length][word2.length];
-};
+}
 console.log(minDistance("horse", "ros"));
 console.log(minDistance("intention", "execution"));

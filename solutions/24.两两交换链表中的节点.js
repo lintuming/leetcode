@@ -7,15 +7,17 @@
 // @lc code=start
 /**
  * Definition for singly-linked list.
- * function ListNode(val) {
- *     this.val = val;
- *     this.next = null;
- * }
+
  */
 /**
  * @param {ListNode} head
  * @return {ListNode}
  */
+function ListNode(val) {
+  this.val = val;
+  this.next = null;
+}
+
 var swapPairs = function (head) {
   const dummy = new ListNode();
   dummy.next = head;
@@ -40,3 +42,8 @@ var swapPairs = function (head) {
   return dummy.next;
 };
 // @lc code=end
+
+const head1 = new ListNode(1);
+[2, 3, 4, 5].reduce((prev, val) => (prev.next = new ListNode(val)), head1);
+
+console.log(JSON.stringify(swapPairs(head1)));

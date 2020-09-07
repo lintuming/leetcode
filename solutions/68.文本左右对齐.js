@@ -10,7 +10,22 @@
  * @param {number} maxWidth
  * @return {string[]}
  */
-var fullJustify = function (words, maxWidth) {
+var fullJustify = function s2(words, maxWidth) {
+  const ans = [];
+  let i = 0;
+  let j = 0;
+  while (j < words.length) {
+    let begin = j;
+    let sum = words[j].length;
+    j++;
+    while (words[j].length + sum + 1 <= maxWidth) {
+      j++;
+    }
+    
+  }
+};
+
+function s1(words, maxWidth) {
   const result = [];
   let i = 0;
   while (i < words.length) {
@@ -31,51 +46,43 @@ var fullJustify = function (words, maxWidth) {
       result.push(w + " ".repeat(maxWidth - w.length));
     } else {
       while (rest) {
-        ws.forEach((w,i) => {
-          if (rest > 0&&i!==ws.length-1) {
+        ws.forEach((w, i) => {
+          if (rest > 0 && i !== ws.length - 1) {
             rest--;
             w = w + " ";
           }
-          ws[i]=w
+          ws[i] = w;
         });
       }
       result.push(ws.join(" "));
     }
   }
   return result;
-};
+}
 // @lc code=end
+
+function justifyImgs(imgs, maxWidth) {
+  const heightBase = imgs.reduce((acc, item) => acc * item[1], 1);
+  let sum = 0;
+  for (let i = 0; i < imgs.length; i++) {
+    const [w, h] = imgs[i];
+    const newH = heightBase;
+    const newW = (heightBase / h) * w;
+    imgs[i] = [newW, newH];
+    sum += newW;
+  }
+  let shrinkLevel = maxWidth / sum;
+  shrinkLevel =
+    shrinkLevel >= 1 ? Math.floor(shrinkLevel) : shrinkLevel.toFixed(1);
+  return imgs.map(([w, h]) => [w * shrinkLevel, h * shrinkLevel]);
+}
 console.log(
-  fullJustify(
-    ["This", "is", "an", "example", "of", "text", "justification."],
-    16
-  )
-);
-console.log(
-  fullJustify(["What", "must", "be", "acknowledgment", "shall", "be"], 16)
-);
-console.log(
-  fullJustify(
+  justifyImgs(
     [
-      "Science",
-      "is",
-      "what",
-      "we",
-      "understand",
-      "well",
-      "enough",
-      "to",
-      "explain",
-      "to",
-      "a",
-      "computer.",
-      "Art",
-      "is",
-      "everything",
-      "else",
-      "we",
-      "do",
+      [1, 1],
+      [3, 4],
+      [1, 1],
     ],
-    20
+    10
   )
 );

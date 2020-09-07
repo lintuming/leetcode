@@ -9,7 +9,33 @@
  * @param {number[]} heights
  * @return {number}
  */
-var largestRectangleArea = function (heights) {
+// 单调栈
+var largestRectangleArea = function s2(heights){
+  const stack = [];
+  heights.push(0);
+  heights.unshift(0);
+  let ans = 0
+  for (let i = 0; i < heights.length; i++) {
+    while (stack.length && heights[stack[stack.length - 1]] > heights[i]) {
+      const top = stack[stack.length - 1];
+      stack.pop();
+      const left = stack[stack.length - 1] + 1
+      const right = i
+      ans = Math.max(ans, (right - left) * heights[top])
+    }
+    stack.push(i)
+  }
+  return ans
+}
+
+
+
+
+
+
+
+
+function s1(heights) {
   if (heights.length === 0) return 0;
   let max = 0;
   for (let i = 0; i < heights.length; i++) {

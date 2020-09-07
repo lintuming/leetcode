@@ -9,7 +9,22 @@
  * @param {string} s
  * @return {number}
  */
-var numDecodings = s1;
+var numDecodings = function s2(s) {
+  if (s[0] === "0") {
+    return 0;
+  }
+  const dp = [1];
+  for (let i = 1; i < s.length; i++) {
+    const pair = s.slice(i - 1, i + 1);
+    if (pair > 26 && s[i] === "0") {
+      return 0;
+    }
+    dp[i] =
+      (s[i] === "0" ? 0 : dp[i - 1]) +
+      (pair <= 26 && s[i - 1] !== "0" ? dp[i - 2] || 1 : 0);
+  }
+  return dp[s.length - 1]
+};
 
 function s1(s) {
   if (s[0] === "0") return 0;

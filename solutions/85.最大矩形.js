@@ -9,7 +9,40 @@
  * @param {character[][]} matrix
  * @return {number}
  */
-var maximalRectangle = function (matrix) {
+var maximalRectangle = function s2(matrix){
+  const dp = [];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function s1(matrix) {
   let max = 0;
   if (matrix.length === 0) return max;
   const buffer = [];

@@ -9,11 +9,20 @@
  * @param {string[]} strs
  * @return {string[][]}
  */
+
+const count = Array.from({ length: 26 }, () => 0);
+function hashfy(str, index = 0) {
+  if (index >= str.length) {
+    return count.join("#");
+  }
+  const i = str.charCodeAt(index) - "a".charCodeAt(0);
+  count[i]++;
+  const result = hashfy(str, index + 1);
+  count[i]--;
+  return result;
+}
 var groupAnagrams = function s1(strs) {
   const ans = [];
-  function hashfy(str) {
-    
-  }
   const hashTable = new Map();
   for (let i = 0; i < strs.length; i++) {
     const hash = hashfy(strs[i]);
@@ -24,7 +33,7 @@ var groupAnagrams = function s1(strs) {
     }
   }
   hashTable.forEach((v) => ans.push(v));
-  return ans
+  return ans;
 };
 
 function s2(strs) {

@@ -9,33 +9,46 @@
  * @param {number[]} nums
  * @return {number[][]}
  */
-var permute = function s2(nums){
+var permute = function s2(nums) {
   const ans = [];
-}
-
-
-
-
-
-
-
-function s1(nums) {
-  const result = [];
-  const buffer = new Set();
+  const buffer = [];
+  const usedIndex = [];
   function backTrack() {
-    if (buffer.size === nums.length) {
-      return result.push([...buffer]);
+    if (buffer.length >= nums.length) {
+      return ans.push(buffer.slice());
     }
     for (let i = 0; i < nums.length; i++) {
-      const n = nums[i];
-      if (buffer.has(n)) continue;
-      buffer.add(n);
+      if (usedIndex[i]) {
+        continue;
+      }
+      buffer.push(nums[i]);
+      usedIndex[i] = true;
       backTrack();
-      buffer.delete(n)
+      buffer.pop();
+      usedIndex[i] = false;
     }
   }
   backTrack();
-  return result;
+  return ans
 };
+
+// function s1(nums) {
+//   const result = [];
+//   const buffer = new Set();
+//   function backTrack() {
+//     if (buffer.size === nums.length) {
+//       return result.push([...buffer]);
+//     }
+//     for (let i = 0; i < nums.length; i++) {
+//       const n = nums[i];
+//       if (buffer.has(n)) continue;
+//       buffer.add(n);
+//       backTrack();
+//       buffer.delete(n)
+//     }
+//   }
+//   backTrack();
+//   return result;
+// };
 // @lc code=end
 console.log(permute([1, 2, 3]));

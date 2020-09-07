@@ -11,7 +11,14 @@
  * @return {string}
  */
 
-var getPermutation = function (n, k) {
+var getPermutation = function s2(n, k) {
+  const used = new Map();
+  function recurse(k){
+    if(used.size === )
+  }
+};
+
+function s1(n, k) {
   let i = 0;
   const used = new Set();
   function backTrack() {
@@ -35,9 +42,9 @@ var getPermutation = function (n, k) {
       }
     }
   }
+
   return backTrack();
-};
+}
 // @lc code=end
 console.log(getPermutation(3, 3));
 console.log(getPermutation(4, 9));
-

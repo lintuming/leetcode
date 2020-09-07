@@ -10,13 +10,48 @@
  * @param {number[]} newInterval
  * @return {number[][]}
  */
-var insert = function (intervals, newInterval) {
+var insert = function s2(intervals, newInterval) {
+  if (intervals.length === 0) {
+    return [newInterval];
+  }
+  const l = intervals.length;
+  const ans = [];
+  let i = 0;
+  for (; i < l; i++) {
+    const interval = intervals[i];
+    if (newInterval[0] < interval[0]) {
+      break;
+    }
+    ans.push(interval)
+  }
+  const lastInterval = ans[ans.length - 1];
+  if (lastInterval && newInterval[0] <= lastInterval[1]) {
+    lastInterval[0] = Math.min(newInterval[0], lastInterval[0]);
+    lastInterval[1] = Math.max(newInterval[1], lastInterval[1]);
+  } else {
+    ans.push(newInterval);
+  }
+  for (; i < l; i++) {
+    const interval = intervals[i];
+    const lastInterval = ans[ans.length - 1];
+    if (lastInterval && interval[0] <= lastInterval[1]) {
+      lastInterval[0] = Math.min(interval[0], lastInterval[0]);
+      lastInterval[1] = Math.max(interval[1], lastInterval[1]);
+    } else {
+      ans.push(interval);
+    }
+  }
+
+  return ans;
+};
+
+function s1(intervals, newInterval) {
   if (intervals.length === 0) return [newInterval];
   const result = [];
   let lastInterval = null;
-  if(intervals[intervals.length-1][0]<newInterval[0]){
+  if (intervals[intervals.length - 1][0] < newInterval[0]) {
     intervals.push(newInterval);
-    newInterval = null
+    newInterval = null;
   }
   for (let i = 0; i < intervals.length; i++) {
     let interval = intervals[i];
@@ -43,16 +78,9 @@ var insert = function (intervals, newInterval) {
     result.push(lastInterval);
   }
   return result;
-};
+}
 // @lc code=end
-console.log(
-  insert(
-    [
-      [1, 3],
-    ],
-    [2, 5]
-  )
-);
+console.log(insert([[1, 3]], [2, 5]));
 console.log(
   insert(
     [

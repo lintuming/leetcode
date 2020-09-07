@@ -9,7 +9,42 @@
  * @param {number[][]} matrix
  * @return {void} Do not return anything, modify matrix in-place instead.
  */
-var setZeroes = function (matrix) {
+var setZeroes = function s2(matrix) {
+  if (matrix.length === 0) {
+    return matrix;
+  }
+  outer: for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[0].length; j++) {
+      if (skipColumn.has(j) || matrix[i][j] === 1) {
+        continue;
+      }
+      let left = j - 1,
+        right = j + 1,
+        top = i - 1,
+        bottom = i + 1;
+      while (left >= 0) {
+        matrix[i][left] = 0;
+        left--;
+      }
+      while (right < matrix[0].length) {
+        matrix[i][right] = 0;
+        right++;
+      }
+      while (top >= 0) {
+        matrix[top][j] = 0;
+        top--;
+      }
+      while (bottom < matrix.length) {
+        matrix[bottom][j] = 0;
+        bottom++;
+      }
+      skipColumn.set(j, true);
+    }
+  }
+  return matrix;
+};
+
+function s1(matrix) {
   if (matrix.length === 0) return matrix;
 
   function visit(y, x, mutate) {
@@ -38,7 +73,7 @@ var setZeroes = function (matrix) {
   visit(0, 0);
   visit(0, 0, true);
   return matrix;
-};
+}
 // @lc code=end
 console.log(
   setZeroes([

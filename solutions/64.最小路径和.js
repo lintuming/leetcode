@@ -9,7 +9,24 @@
  * @param {number[][]} grid
  * @return {number}
  */
-var minPathSum = function (grid) {
+const MAX = Number.MAX_SAFE_INTEGER;
+var minPathSum = function s2(grid) {
+  if (grid.length === 0) return 0;
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[i].length; j++) {
+      if (i === 0 && j === 0) continue;
+      grid[i][j] =
+        grid[i][j] +
+        Math.min(
+          i === 0 ? MAX : grid[i - 1][j],
+          j === 0 ? MAX : grid[i][j - 1]
+        );
+    }
+  }
+  return grid[grid.length - 1][grid[0].length - 1];
+};
+
+function s1(grid) {
   for (let y = 0; y < grid.length; y++) {
     for (let x = 0; x < grid[0].length; x++) {
       if (y === 0) {
@@ -24,7 +41,7 @@ var minPathSum = function (grid) {
     }
   }
   return grid[grid.length - 1][grid[0].length - 1];
-};
+}
 // @lc code=end
 console.log(
   minPathSum([

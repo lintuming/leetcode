@@ -7,6 +7,7 @@
 - [44.通配符匹配](./solutions/44.通配符匹配.js)
 - [48.旋转图像](./solutions/48.旋转图像.js)
 - [65.有效数字](./solutions/65.有效数字.js) - 使用了有限状态机
+- [75.颜色分类](./solutions/75.颜色分类.js)
 - [76.最小覆盖子串](./solutions/76.最小覆盖子串.js)
 - [126.单词接龙-ii](./solutions/126.单词接龙-ii.js)
 - [128.最长连续序列](./solutions/128.最长连续序列.js) - O(2n)时间复杂度也算O(n)
@@ -18,6 +19,7 @@
 
 # re-consider
 
+- [84.柱状图中最大的矩形](./solutions/84.柱状图中最大的矩形.js)单调栈
 - [89.格雷编码](./solutions/89.格雷编码.js) - https://excalidraw.com/#json=5089071357493248,Lay1QrhS3ylEVSkKV9M5TQ
 - [91.解码方法](./solutions/91.解码方法.js)
 - [95.不同的二叉搜索树-ii](./solutions/95.不同的二叉搜索树-ii.js)

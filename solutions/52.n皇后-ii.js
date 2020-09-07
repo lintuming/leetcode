@@ -10,16 +10,42 @@
  * @return {number}
  */
 
+var totalNQueens = function s2(n) {
+  let ans = 0;
+  const buffer = [];
+  function backTrack(rowIndex) {
+    if (rowIndex >= n) {
+      return ans++;
+    }
+    for (let columnIndex = 0; columnIndex < n; columnIndex++) {
+      if (
+        buffer.length === 0 ||
+        buffer.every(
+          (x, y) =>
+            x !== columnIndex &&
+            x !== columnIndex - (rowIndex - y) &&
+            x !== columnIndex + (rowIndex - y)
+        )
+      ) {
+        buffer.push(columnIndex);
+        backTrack(rowIndex + 1);
+        buffer.pop();
 
+      }
+    }
+  }
+  backTrack(0)
+  return ans
+};
 
-var totalNQueens = function (n) {
+function s1(n) {
   let solotions = 0;
   const buffer = [];
 
   function canPlaced(col, row) {
     if (buffer.length === 0) return true;
     return buffer.every((placedRow, placedCol) => {
-      const offset = (col - placedCol);
+      const offset = col - placedCol;
       return (
         placedRow !== row &&
         placedRow !== row - offset &&
@@ -42,6 +68,6 @@ var totalNQueens = function (n) {
   }
   backTrack(0);
   return solotions;
-};
+}
 // @lc code=end
 console.log(totalNQueens(4));

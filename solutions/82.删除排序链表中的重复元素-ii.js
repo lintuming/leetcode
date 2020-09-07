@@ -16,7 +16,43 @@
  * @param {ListNode} head
  * @return {ListNode}
  */
-var deleteDuplicates = function (head) {
+var deleteDuplicates = function s2(head){
+  const dummy = new ListNode();
+  dummy.next = head;
+  let sentry = dummy;
+  while (sentry) {
+    let right = sentry.next;
+    while (sentry.next &&right.next&& sentry.next.val === right.next.val) {
+      right = right.next;
+    }
+    if (sentry.next === right) {
+      sentry = sentry.next
+    } else {
+      sentry.next = right.next;
+    }
+  }
+  return dummy.next
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function s1 (head) {
   const dummy = new ListNode();
   dummy.next = head;
   let slow = dummy;

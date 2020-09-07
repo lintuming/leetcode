@@ -11,7 +11,69 @@
  * @param {string[]} wordList
  * @return {string[][]}
  */
-var findLadders = s2;
+var findLadders = s3
+
+function s3(beginWord, endWord, wordList) {
+  
+  const graph = new Map();
+  graph.set(beginWord,[])
+  function transformable(w1,w2){
+    let diff = 0;
+    for (let i = 0; i < w1.length&&diff < 2; i++) {
+      if (w1[i] !== w2[i]) {
+        diff++
+      }
+    }
+    return diff < 2;
+  }
+  function addPair(w1,w2){
+    graph.get(w1).push(w2);
+    graph.get(w2).push(w1)
+  }
+  const costs = new Map();
+  for (let i = 0; i < wordList.length; i++) {
+    const w1 = wordList[i];
+    costs.set(w1,Number.MAX_SAFE_INTEGER)
+    if (!graph.has(w1)) {
+      graph.set(w1, []);
+    }
+    if (transformable(w1,beginWord)) {
+      addPair(w1,beginWord)
+    }
+    for (let j = i + 1; j < wordList.length; j++) {
+      const w2 = wordList[j]
+        if (!graph.has(w2)) {
+          graph.set(w2,[]);
+        }
+        if (transformable(w1,w2)) {
+          addPair(w1,w2)
+        }
+    }
+  }
+  costs.set(beginWord,0);
+  const queue = [[beginWord]];
+  const ans = [];
+  while (queue.length !== 0) {
+    const path = queue.shift();
+    const last = path[path.length - 1];
+    if (last === endWord) {
+      ans.push(path)
+    } else {
+      const to = graph.get(last);
+      const newCost = costs.get(last) + 1
+      for (let i = 0; i < to.length; i++) {
+        if (newCost <= costs.get(to[i]) ) {
+          costs.set(to[i],newCost)
+          queue.push([...path,to[i]])
+        }
+      }
+    }
+  }
+  return ans
+};
+console.log(
+  findLadders("hit", "cog", ["hot", "dot", "dog", "lot", "log", "cog"])
+);
 
 function s2(beginWord, endWord, wordList) {
   let id = 0;
@@ -54,6 +116,7 @@ function s2(beginWord, endWord, wordList) {
   // beginword 到 wordList任一一个word的距离
   const costs = Array.from({ length: id }, () => Number.MAX_SAFE_INTEGER);
   costs[enums.get(beginWord)] = 0;
+  console.log(edges,enums.get(beginWord))
   while (queue.length) {
     const path = queue.shift();
     const lastWord = path[path.length - 1];
@@ -74,46 +137,4 @@ function s2(beginWord, endWord, wordList) {
   return ans
 }
 
-// timeout
-function s1(beginWord, endWord, wordList) {
-  const ans = [];
-  const buffer = [beginWord];
-  let min = Number.MAX_SAFE_INTEGER;
-  if (wordList.indexOf(endWord) < 0) {
-    return ans;
-  }
-  const usages = {};
-  function canTransform(a, b) {
-    for (let i = 0; i < a.length; i++) {
-      if (
-        a.slice(0, i) === b.slice(0, i) &&
-        a.slice(i + 1) === b.slice(i + 1)
-      ) {
-        return true;
-      }
-    }
-    return false;
-  }
-  function backTrack(w) {
-    if (w === endWord && buffer.length <= min) {
-      min = Math.min(buffer.length, min);
-      return ans.push(buffer.slice());
-    }
-    if (buffer.length >= min) return;
-    for (let i = 0; i < wordList.length; i++) {
-      const str = wordList[i];
-      if (usages[str] || !canTransform(w, str)) continue;
-      buffer.push(str);
-      usages[str] = true;
-      backTrack(str);
-      buffer.pop();
-      usages[str] = false;
-    }
-  }
-  backTrack(beginWord);
-  return ans.filter((a) => a.length === min);
-}
 // @lc code=end
-console.log(
-  findLadders("hit", "cog", ["hot", "dot", "dog", "lot", "log", "cog"])
-);

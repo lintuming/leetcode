@@ -25,6 +25,7 @@ function s2(gas, cost) {
   }
   let start = 0;
   for (let i = 0; i < l; i++) {
+    console.log(start,i)
     const restGas = total[i] - (total[start - 1] || 0);
     const costs = totalCost[i] - (totalCost[start - 1] || 0);
     if (costs > restGas) {
@@ -33,12 +34,12 @@ function s2(gas, cost) {
   }
   return start
 }
-console.log(canCompleteCircuit([2, 3, 4], [3, 4, 3]));
+// console.log(canCompleteCircuit([2, 3, 4], [3, 4, 3]));
 
 console.log(canCompleteCircuit(
     [1, 2, 3, 4, 5], 
     [3, 4, 5, 1, 2]));
-console.log(canCompleteCircuit([5, 1, 2, 3, 4], [4, 4, 1, 5, 1]));
+// console.log(canCompleteCircuit([5, 1, 2, 3, 4], [4, 4, 1, 5, 1]));
 function s1(gas, cost) {
   const total = [gas[0]];
   const totalCost = [cost[0]];

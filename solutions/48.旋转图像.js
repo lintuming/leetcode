@@ -27,24 +27,40 @@
   [15,14,12,16]
 ], 
  */
-var rotate = solution1;
-
-function solution1(matrix) {
-  let start = 0,
-    end = matrix.length - 1;
-  while (start < end) {
-    for (let i = start; i < end; i++) {
-      let temp = matrix[i][start];
-      matrix[i][start] = matrix[end][i];
-      matrix[end][i] = matrix[end - i + start][end];
-      matrix[end - i + start][end] = matrix[start][end - i + start];
-      matrix[start][end - i + start] = temp;
+var rotate = function s2(matrix) {
+  let indexStart = 0,
+    indexEnd = matrix.length - 1;
+  while (indexStart < indexEnd) {
+    for (let i = indexStart; i < indexEnd; i++) {
+      const temp = matrix[i][indexStart];
+      matrix[i][indexStart] = matrix[indexEnd][i];
+      matrix[indexEnd][i] = matrix[indexEnd - i + indexStart][indexEnd];
+      matrix[indexEnd - i + indexStart][indexEnd] =
+        matrix[indexStart][indexEnd - i + indexStart];
+      matrix[indexStart][indexEnd - i + indexStart] = temp;
     }
-    start++;
-    end--;
+    indexStart++;
+    indexEnd--;
   }
-  return matrix;
-}
+  return matrix
+};
+
+// function solution1(matrix) {
+//   let start = 0,
+//     end = matrix.length - 1;
+//   while (start < end) {
+//     for (let i = start; i < end; i++) {
+//       let temp = matrix[i][start];
+//       matrix[i][start] = matrix[end][i];
+//       matrix[end][i] = matrix[end - i + start][end];
+//       matrix[end - i + start][end] = matrix[start][end - i + start];
+//       matrix[start][end - i + start] = temp;
+//     }
+//     start++;
+//     end--;
+//   }
+//   return matrix;
+// }
 // @lc code=end
 console.log(
   rotate([

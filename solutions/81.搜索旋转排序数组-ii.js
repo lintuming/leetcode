@@ -11,11 +11,24 @@
  * @return {boolean}
  */
 
+
+var search = function s2(nums,target){
+
+
+}
+
+
+
+
+
+
+
  /**
   * 由于存在重复项，需要去重 O(n);
-  * O(n) + O(logM)
+  * O(n) + O(logM),
+  * 过犹不及
   */
-var search = function (nums, target) {
+function s1(nums, target) {
 
   const hashMap = {};
   let j = 0,

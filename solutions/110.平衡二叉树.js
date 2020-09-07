@@ -16,7 +16,23 @@
  * @param {TreeNode} root
  * @return {boolean}
  */
-var isBalanced = function (root) {
+var isBalanced = function s2(root) {
+  if (!root) return true;
+  function depth(node) {
+    if (!node) {
+      return 0;
+    }
+    return Math.max(depth(node.left), depth(node.right)) + 1;
+  }
+
+  return (
+    Math.abs(depth(root.left)-depth(root.right)) <= 1 &&
+    isBalanced(root.left) &&
+    isBalanced(root.right)
+  );
+};
+
+function s1(root) {
   if (!root) return true;
   function depth(node) {
     if (!node) return 0;
@@ -29,7 +45,7 @@ var isBalanced = function (root) {
     isBalanced(root.left) &&
     isBalanced(root.right)
   );
-};
+}
 // @lc code=end
 
 //            1
