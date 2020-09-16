@@ -17,11 +17,26 @@
  * @return {number}
  */
 var countNodes = function(root) {
-  let ans = 0;
-  function isFullBinaryTree(node){
-    if(!node) return false;
-    
+  const stack = [];
+  let node = root;
+  let count = 0;
+  while (node || stack.length) {
+    if (node) {
+      if (node.right) {
+        stack.push(node.right);
+      }
+      stack.push(node);
+      node = node.left;
+    } else {
+      const popedNode = stack.pop();
+      if (popedNode.right === stack[stack.length - 1]) {
+        node = stack.pop();
+        stack.push(popedNode);
+      } else {
+        count ++;
+      }
+    }
   }
+  return count
 };
 // @lc code=end
-

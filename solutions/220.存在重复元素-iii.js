@@ -11,7 +11,19 @@
  * @param {number} t
  * @return {boolean}
  */
-var containsNearbyAlmostDuplicate = function (nums, k, t) {
+var containsNearbyAlmostDuplicate = function s2(nums,k,t){
+  for (let i = 0; i < nums.length; i++) {
+    let j = i + 1;
+    for(;j < nums.length && j <= i + k;j++){
+      if(Math.abs(nums[i] - nums[j])<=t){
+        return true
+      }
+    }
+  }
+  return false
+}
+
+function s1(nums, k, t) {
   const hashTable = new Map();
   for (let i = 0; i < nums.length; i++) {
 
